@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery jpzoom</title>
+	<link rel="stylesheet" href="css/jqzoom.css" type="text/css">
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js">
+    	
+    </script>
+    <script type="text/javascript" src="js/jqzoom.js">  
+    	
+    </script>
+    <script type="text/javascript">
+    	 $(function(){
+    		//js实现
+    		var zoom=document.getElementById("zoom");
+    		var jq=document.getElementById("jq");
+    		if(window.attachEvent){
+                //兼容IE6/7/8
+                var li=jq.nextSibling.children;
+    		}
+    		if(window.attachEvent && window.addEventListener){
+                   //兼容IE9/10
+                   var li=jq.nextSibling.nextSibling.children;
+    		}
+    		if(window.addEventListener){
+    			//兼容chrome  firefox
+    			var li=jq.nextSibling.nextSibling.children;
+    		}
+    		for(i=0;i<li.length;i++){
+                 li[i].children[0].onmouseover=function(){
+                 	zoom.src="images/small/"+this.src.slice(-10);
+                 	zoom.setAttribute("jqimg","images/large/"+this.src.slice(-10));
+                 };
+    		}
+    		$(".jqzoom").jqueryzoom({
+	    			xzoom:400,//右侧大图区域宽度
+	    			yzoom:400,//右侧大图区域高度
+	    			offset:10 //右侧大图区相对于左侧标准图区的偏移量
+	    		});
+
+    	});
+    </script>
+
+</head>
+<body>
+	<div id="content">
+		<div class="jqzoom" id="jq">
+			<img id="zoom" src="images/small/image1.jpg" jqimg="images/large/image1.jpg" alt="">
+		</div>
+		<ul>
+			<li><img src="images/thumb/image1.jpg" alt=""></li>
+			<li><img src="images/thumb/image2.jpg" alt=""></li>
+			<li><img src="images/thumb/image3.jpg" alt=""></li>
+			<li><img src="images/thumb/image4.jpg" alt=""></li>
+		</ul>
+	</div>
+</body>
+</html>
